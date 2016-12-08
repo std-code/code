@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>SAMPLE01</title>
+<style>
+body {
+	background: url(http://webdesignrecipes.com/wp-content/uploads/2012/07/body-bg.jpg) repeat 0 0;
+	font-family:"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Arial, sans-serif;
+	font-size: 14px;
+	color: #555;
+}
+#container{
+	max-width: 940px;
+	margin: 40px auto;	
+}
+
+h1{
+	font-size: 100%;
+}
+
+img{
+	margin: 0;
+	vertical-align: bottom;
+}
+
+#main-image{
+	position: relative;
+	width: 480px;
+	height: 320px;
+}
+
+#main-image img{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#thumbnails{
+	list-style: none;
+	margin:0;
+	padding:0;
+}
+
+#thumbnails li{
+	margin-right: 13px;
+	margin-bottom: 30px;
+	float: left;
+	position: relative;
+}
+
+.overlay{
+	display: block;
+	width: 100%;
+	height: 100%;
+	background: url(http://webdesignrecipes.com/wp-content/uploads/2012/07/zoom.png) no-repeat 0 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+}
+
+.clearboth{
+	clear: both;
+}
+.shadow {
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
+$(function() {
+	$("#thumbnails").find("a").append('<span class="overlay"></span>').click(
+		function(){
+			if (($("#main-image img").length)==2){
+				$("#main-image img:last").remove();
+			}
+			$("#main-image img").before('<img class="shadow" src="' + $(this).attr("href") + '" alt="" >');
+			$("#main-image img:last").fadeOut(500, function(){
+				$(this).remove();
+			});
+			return false;
+		}).hover(function(){
+			if(jQuery.support.opacity){
+				$(this).find("span:not(:animated)").fadeIn();
+			}else{
+				$(this).find("span").show();
+			}
+		},
+		function(){
+			if(jQuery.support.opacity){
+				$(this).find("span").fadeOut();
+			}else{
+				$(this).find("span").hide();
+			}
+		});
+});
+</script>
+</head>
+<body>
+<div id="container">
+<p id="main-image">
+<img src="http://webdesignrecipes.com/wp-content/uploads/2012/07/fyiloveseoul.jpg" alt="Tumblr で見つけた写真" title="Tumblr で見つけた写真" class="shadow size-full wp-image-10853" />
+</p>
+<ul id="thumbnails">
+<li><a href="http://webdesignrecipes.com/wp-content/uploads/2012/07/fyiloveseoul.jpg"><img src="http://webdesignrecipes.com/wp-content/uploads/2012/07/fyiloveseoul-S.jpg" alt="Tumblr で見つけた写真" title="Tumblr で見つけた写真" class="shadow size-full wp-image-10854" /></a></li>
+<li><a href="http://webdesignrecipes.com/wp-content/uploads/2012/07/styleinseoul.jpg"><img src="http://webdesignrecipes.com/wp-content/uploads/2012/07/styleinseoul-S.jpg" alt="Tumblr で見つけた写真" title="Tumblr で見つけた写真" class="shadow size-full wp-image-10855" /></a></li>
+<li><a href="http://webdesignrecipes.com/wp-content/uploads/2012/07/tumblr_m6jsorX0Bt1qhahtxo1_1280.jpg"><img src="http://webdesignrecipes.com/wp-content/uploads/2012/07/tumblr_m6jsorX0Bt1qhahtxo1_1280-S.jpg" alt="Tumblr で見つけた写真" title="Tumblr で見つけた写真" class="shadow size-full wp-image-10857" /></a></li>
+<li><a href="http://webdesignrecipes.com/wp-content/uploads/2012/07/tumblr_m6jyd4LGHi1qkkawao1_500.jpg"><img src="http://webdesignrecipes.com/wp-content/uploads/2012/07/tumblr_m6jyd4LGHi1qkkawao1_500-S.jpg" alt="Tumblr で見つけた写真" title="Tumblr で見つけた写真" class="shadow size-full wp-image-10859" /></a></li>
+</ul>
+
+<p class="clearboth">
+サムネイル画像をクリックすると、メイン画像が切り替わります。
+</p>
+
+</div>
+<!-- /container -->
+</body>
+</html>
